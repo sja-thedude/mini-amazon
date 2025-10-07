@@ -38,3 +38,10 @@ npm install
 
 # Run the app
 npx expo start
+```
+
+## Usage
+	•	Login with dummy credentials
+	•	Browse products
+	•	Add items to cart and checkout
+	•	Admin can add/remove products
