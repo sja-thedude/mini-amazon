@@ -40,6 +40,13 @@ npm install
 npx expo start
 ```
 
+## Test:
+
+| Role   | Username | Password    |
+| ------ | -------- | ----------- |
+| Admin  | `admin`  | `admin123`  |
+| Client | `client` | `client123` |
+
 ## Usage
 	•	Login with dummy credentials
 	•	Browse products

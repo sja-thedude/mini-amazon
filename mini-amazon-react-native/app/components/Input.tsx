@@ -1,14 +1,15 @@
 import React from "react";
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, TextInputProps } from "react-native";
 
 type Props = {
   placeholder: string;
   value: string;
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
+  keyboardType?: TextInputProps["keyboardType"]; // ✅ add this
 };
 
-export default function Input({ placeholder, value, onChangeText, secureTextEntry }: Props) {
+export default function Input({ placeholder, value, onChangeText, secureTextEntry, keyboardType }: Props) {
   return (
     <TextInput
       style={styles.input}
@@ -16,6 +17,7 @@ export default function Input({ placeholder, value, onChangeText, secureTextEntr
       value={value}
       onChangeText={onChangeText}
       secureTextEntry={secureTextEntry}
+      keyboardType={keyboardType} // ✅ pass it to TextInput
     />
   );
 }

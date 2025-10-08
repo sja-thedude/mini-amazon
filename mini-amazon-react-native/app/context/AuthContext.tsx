@@ -1,13 +1,9 @@
 import React, { createContext, useState, ReactNode } from "react";
-
-type User = {
-  username: string;
-  role: "admin" | "client";
-};
+import { User } from "../types/user";
 
 type AuthContextType = {
   user: User | null;
-  login: (username: string, password: string) => void;
+  login: (username: string, password: string, role: "admin" | "client") => void;
   logout: () => void;
 };
 
@@ -20,13 +16,22 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const login = (username: string, password: string) => {
-    // Dummy login
-    if (username === "admin") setUser({ username, role: "admin" });
-    else setUser({ username, role: "client" });
+  const login = (username: string, password: string, role: "admin" | "client") => {
+    if (
+      (role === "admin" && username === "admin" && password === "admin123") ||
+      (role === "client" && username === "client" && password === "client123")
+    ) {
+      setUser({ username, role });
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
-  const logout = () => setUser(null);
+  const logout = () => {
+  console.log("AuthProvider: logging out (before setUser):", user);
+  setUser(null);
+  console.log("AuthProvider: user after setUser:", null);
+};
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
