@@ -1,7 +1,7 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState } from "react";
 import {
   View, Text, ScrollView, Image, TouchableOpacity, StyleSheet,
-  useWindowDimensions, TextInput, FlatList, Platform,
+  useWindowDimensions, TextInput, Platform,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -45,7 +45,6 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [bannerIndex, setBannerIndex] = useState(0);
-  const bannerRef = useRef<FlatList>(null);
 
   const isWide = width > 768;
   const padding = 12;
@@ -116,19 +115,17 @@ export default function Home() {
         {/* Deals banner carousel */}
         {!search && selectedCategory === "All" && (
           <View>
-            <FlatList
-              ref={bannerRef}
-              data={DEALS_BANNER}
+            <ScrollView
               horizontal
               pagingEnabled
               showsHorizontalScrollIndicator={false}
-              keyExtractor={(item) => item.id}
               onMomentumScrollEnd={(e) => {
                 const idx = Math.round(e.nativeEvent.contentOffset.x / bannerWidth);
                 setBannerIndex(idx);
               }}
-              renderItem={({ item }) => (
-                <View style={[styles.bannerSlide, { width: bannerWidth }]}>
+            >
+              {DEALS_BANNER.map((item) => (
+                <View key={item.id} style={[styles.bannerSlide, { width: bannerWidth }]}>
                   <Image source={{ uri: item.image }} style={styles.bannerImage} />
                   <View style={styles.bannerOverlay}>
                     <Text style={styles.bannerTitle}>{item.title}</Text>
@@ -138,8 +135,8 @@ export default function Home() {
                     </View>
                   </View>
                 </View>
-              )}
-            />
+              ))}
+            </ScrollView>
             <View style={styles.bannerDots}>
               {DEALS_BANNER.map((_, i) => (
                 <View key={i} style={[styles.dot, bannerIndex === i && styles.dotActive]} />
