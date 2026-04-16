@@ -1,54 +1,85 @@
 # Mini Amazon - React Native
 
 ## Overview
-Mini Amazon is a **prototype e-commerce app** built with React Native to showcase my skills as a mobile app developer.  
-It includes basic e-commerce features and dashboards for both admin and clients. This version is a **minimal MVP** but designed to be **easily extendable**.
+Mini Amazon is a **prototype e-commerce app** built with React Native (Expo) to showcase mobile app development skills.  
+It includes e-commerce features and dashboards for both admin and clients, with an Amazon-inspired UI theme.
 
-## Features (MVP)
-- User authentication (login/logout) [mock or Firebase]
-- Product listing with image, price, description
-- Cart: Add/remove items, view total price
-- Checkout (mock payment)
-- Likes/Wishlist for products
-- Admin dashboard: Add/remove products (basic)
-- Client dashboard: View cart & order history (mocked)
+## Features
 
-## Future Enhancements
-- Real payment integration (Stripe/PayPal)
-- Product categories & search
-- Ratings & reviews
-- Push notifications
-- User profiles
+### Client Side
+- **Authentication** — Role-based login (admin/client) with mock credentials
+- **Product Listing** — Browse 12+ products in a responsive grid layout
+- **Product Details** — View full product info with image, price, and description
+- **Shopping Cart** — Add/remove items, view total, clear cart
+- **Checkout** — Review order and place it (mock payment)
+- **Wishlist** — Like/unlike products, view and manage saved items
+- **Add to Cart from Wishlist** — Move wishlist items directly to cart
+
+### Admin Side
+- **Dashboard** — View product count and order stats at a glance
+- **Add Product** — Create new products with name, price, description, and image URL
+- **Delete Product** — Remove products from the store
+- **View Orders** — See all customer orders with item details and totals
+- **Logout** — Secure logout with confirmation
 
 ## Tech Stack
 - React Native (Expo)
-- React Navigation
-- Context API or Redux (optional for cart state)
+- Expo Router (file-based routing)
+- Context API (Auth, Cart, Product, Wishlist state management)
+- TypeScript
 
-## Installation
-```bash
-# Clone the repo
-git clone https://github.com/<username>/mini-amazon-react-native.git
+## Get Started
 
-# Navigate into the directory
-cd mini-amazon-react-native
+1. Clone the repo
 
-# Install dependencies
-npm install
+   ```bash
+   git clone https://github.com/sja-thedude/mini-amazon.git
+   cd mini-amazon
+   ```
 
-# Run the app
-npx expo start
-```
+2. Install dependencies
 
-## Test:
+   ```bash
+   npm install
+   ```
+
+3. Start the app
+
+   ```bash
+   npx expo start
+   ```
+
+In the output, you'll find options to open the app in a
+
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+## Test Credentials
 
 | Role   | Username | Password    |
 | ------ | -------- | ----------- |
 | Admin  | `admin`  | `admin123`  |
 | Client | `client` | `client123` |
 
-## Usage
-	•	Login with dummy credentials
-	•	Browse products
-	•	Add items to cart and checkout
-	•	Admin can add/remove products
+## App Structure
+
+```
+app/
+  _layout.tsx          # Root layout with providers
+  index.tsx            # Entry point with auth routing
+  context/             # State management (Auth, Cart, Product, Wishlist)
+  screens/             # Client screens (Home, ProductDetails, Cart, Checkout, Wishlist)
+  admin/               # Admin screens (Dashboard, AddProduct, Orders)
+  components/          # Reusable UI components (Button, Input, CartItem, ProductCard)
+  types/               # TypeScript type definitions
+```
+
+## Future Enhancements
+- Real payment integration (Stripe/PayPal)
+- Product categories and search
+- Ratings and reviews
+- Push notifications
+- User profiles
+- Backend persistence (Firebase/Supabase)
